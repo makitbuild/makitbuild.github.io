@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Makit Build - Coming Soon</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460, #533483);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            font-family: 'Courier New', 'Monaco', monospace;
+            letter-spacing: 0.1em;
+        }
+
+        .logo .brackets {
+            color: #ffd700;
+            margin-right: 0.3em;
+        }
+
+        .logo .company-name {
+            color: #fff;
+        }
+
+        .logo .build-text {
+            color: #ffa500;
+        }
+
+        .typing-cursor {
+            animation: blink 1s infinite;
+            color: #fff;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .char {
+            opacity: 0;
+            animation: typeIn 0.1s forwards;
+        }
+
+        @keyframes typeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 30px rgba(255, 255, 255, 0.5), 0 0 40px rgba(83, 52, 131, 0.5); }
+            to { text-shadow: 0 0 40px rgba(255, 255, 255, 0.8), 0 0 60px rgba(83, 52, 131, 0.8); }
+        }
+
+        .coming-soon {
+            font-size: 3rem;
+            font-weight: 300;
+            color: #fff;
+            margin-bottom: 2rem;
+            position: relative;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 1s forwards;
+            font-family: 'Courier New', 'Monaco', monospace;
+            letter-spacing: 0.2em;
+        }
+
+        .coming-soon::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #533483, #0f3460);
+            border-radius: 2px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translateX(-50%) scaleX(1); opacity: 1; }
+            50% { transform: translateX(-50%) scaleX(1.2); opacity: 0.8; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .floating-element {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+            border-radius: 50%;
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 30%;
+            left: 20%;
+            animation-delay: 4s;
+            transform: rotate(45deg);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: particleFloat 8s linear infinite;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(50px);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .coming-soon {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    
+    <div class="floating-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
+
+    <div class="container">
+        <h1 class="logo" id="logo"></h1>
+        <h2 class="coming-soon">COMING SOON</h2>
+    </div>
+
+    <script>
+        // Global variables for circular motion detection
+        let mouseTrail = [];
+        let lastMouseTime = 0;
+        let isCircularMotion = false;
+        let circularMotionTimer = null;
+
+        // Generate animated stars
+        function createStars() {
+            const starsContainer = document.querySelector('.stars');
+            const numberOfStars = 100;
+            
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Generate floating particles
+        function createParticles() {
+            const body = document.body;
+            
+            setInterval(() => {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 3 + 5) + 's';
+                body.appendChild(particle);
+                
+                setTimeout(() => {
+                    particle.remove();
+                }, 8000);
+            }, 400);
+        }
+
+        // Detect circular mouse motion for fireworks trigger
+        function detectCircularMotion(positions) {
+            if (positions.length < 4) return false;
+            
+            const recent = positions.slice(-6);
+            
+            if (recent.length >= 4) {
+                const centerX = recent.reduce((sum, pos) => sum + pos.x, 0) / recent.length;
+                const centerY = recent.reduce((sum, pos) => sum + pos.y, 0) / recent.length;
+                
+                const avgDistance = recent.reduce((sum, pos) => {
+                    return sum + Math.sqrt((pos.x - centerX) ** 2 + (pos.y - centerY) ** 2);
+                }, 0) / recent.length;
+                
+                let totalAngleChange = 0;
+                for (let i = 1; i < recent.length; i++) {
+                    const angle1 = Math.atan2(recent[i-1].y - centerY, recent[i-1].x - centerX);
+                    const angle2 = Math.atan2(recent[i].y - centerY, recent[i].x - centerX);
+                    let angleDiff = angle2 - angle1;
+                    
+                    while (angleDiff > Math.PI) angleDiff -= 2 * Math.PI;
+                    while (angleDiff < -Math.PI) angleDiff += 2 * Math.PI;
+                    
+                    totalAngleChange += Math.abs(angleDiff);
+                }
+                
+                return avgDistance > 20 && totalAngleChange > 1.5;
+            }
+            
+            return false;
+        }
+
+        // Create firework explosion effect
+        function createFirework(x, y) {
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7', '#dda0dd', '#98d8c8'];
+            const particleCount = 12;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                const angle = (Math.PI * 2 * i) / particleCount;
+                const velocity = 100 + Math.random() * 50;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                particle.style.position = 'absolute';
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                particle.style.width = '4px';
+                particle.style.height = '4px';
+                particle.style.background = color;
+                particle.style.borderRadius = '50%';
+                particle.style.pointerEvents = 'none';
+                particle.style.zIndex = '100';
+                particle.style.boxShadow = `0 0 6px ${color}`;
+                
+                const deltaX = Math.cos(angle) * velocity;
+                const deltaY = Math.sin(angle) * velocity;
+                
+                particle.style.animation = `fireworkParticle 1s ease-out forwards`;
+                particle.style.setProperty('--deltaX', deltaX + 'px');
+                particle.style.setProperty('--deltaY', deltaY + 'px');
+                
+                document.body.appendChild(particle);
+                
+                setTimeout(() => {
+                    particle.remove();
+                }, 1000);
+            }
+            
+            // Central explosion effect
+            const explosion = document.createElement('div');
+            explosion.style.position = 'absolute';
+            explosion.style.left = (x - 15) + 'px';
+            explosion.style.top = (y - 15) + 'px';
+            explosion.style.width = '30px';
+            explosion.style.height = '30px';
+            explosion.style.background = 'radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%)';
+            explosion.style.borderRadius = '50%';
+            explosion.style.pointerEvents = 'none';
+            explosion.style.zIndex = '99';
+            explosion.style.animation = 'explosion 0.5s ease-out forwards';
+            
+            document.body.appendChild(explosion);
+            
+            setTimeout(() => {
+                explosion.remove();
+            }, 500);
+        }
+
+        // Mouse event handler for fireworks
+        document.addEventListener('mousemove', (e) => {
+            const now = Date.now();
+            
+            mouseTrail.push({
+                x: e.pageX,
+                y: e.pageY,
+                time: now
+            });
+            
+            mouseTrail = mouseTrail.filter(pos => now - pos.time < 2000);
+            
+            if (detectCircularMotion(mouseTrail)) {
+                if (!isCircularMotion) {
+                    isCircularMotion = true;
+                    createFirework(e.pageX, e.pageY);
+                    
+                    // Additional fireworks around the cursor
+                    setTimeout(() => {
+                        for (let i = 0; i < 3; i++) {
+                            const angle = (Math.PI * 2 * i) / 3;
+                            const radius = 80;
+                            const offsetX = Math.cos(angle) * radius;
+                            const offsetY = Math.sin(angle) * radius;
+                            createFirework(e.pageX + offsetX, e.pageY + offsetY);
+                        }
+                    }, 200);
+                }
+                
+                if (circularMotionTimer) clearTimeout(circularMotionTimer);
+                circularMotionTimer = setTimeout(() => {
+                    isCircularMotion = false;
+                }, 1000);
+            }
+            
+            // Subtle cursor trail effect
+            if (!isCircularMotion && Math.random() < 0.1) {
+                const cursor = document.createElement('div');
+                cursor.style.position = 'absolute';
+                cursor.style.left = e.pageX + 'px';
+                cursor.style.top = e.pageY + 'px';
+                cursor.style.width = '8px';
+                cursor.style.height = '8px';
+                cursor.style.background = 'rgba(255, 255, 255, 0.3)';
+                cursor.style.borderRadius = '50%';
+                cursor.style.pointerEvents = 'none';
+                cursor.style.zIndex = '5';
+                cursor.style.animation = 'fadeOut 1s ease-out forwards';
+                document.body.appendChild(cursor);
+                
+                setTimeout(() => {
+                    cursor.remove();
+                }, 1000);
+            }
+            
+            lastMouseTime = now;
+        });
+
+        // Typewriter effect for logo
+        function typeWriterEffect() {
+            const logoElement = document.getElementById('logo');
+            const text = '{ } Makit Build';
+            let index = 0;
+            
+            logoElement.innerHTML = '<span class="typing-cursor">|</span>';
+            
+            function typeNextChar() {
+                if (index < text.length) {
+                    const char = text[index];
+                    const span = document.createElement('span');
+                    span.className = 'char';
+                    span.style.animationDelay = '0s';
+                    
+                    // Color coding for different parts
+                    if (char === '{' || char === '}') {
+                        span.className += ' brackets';
+                        span.style.color = '#ffd700';
+                    } else if (index >= 9) {
+                        span.className += ' build-text';
+                        span.style.color = '#ffd700';
+                    } else {
+                        span.className += ' company-name';
+                        span.style.color = '#fff';
+                    }
+                    
+                    span.textContent = char;
+                    
+                    const cursor = logoElement.querySelector('.typing-cursor');
+                    logoElement.insertBefore(span, cursor);
+                    
+                    index++;
+                    setTimeout(typeNextChar, 100);
+                } else {
+                    // Remove cursor and start glow effect
+                    setTimeout(() => {
+                        const cursor = logoElement.querySelector('.typing-cursor');
+                        if (cursor) cursor.remove();
+                        logoElement.style.animation = 'glow 2s ease-in-out infinite alternate';
+                    }, 500);
+                }
+            }
+            
+            setTimeout(typeNextChar, 1000);
+        }
+
+        // CSS animations for fireworks
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeOut {
+                0% {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+                100% {
+                    opacity: 0;
+                    transform: scale(0);
+                }
+            }
+            
+            @keyframes fireworkParticle {
+                0% {
+                    opacity: 1;
+                    transform: translate(0, 0) scale(1);
+                }
+                100% {
+                    opacity: 0;
+                    transform: translate(var(--deltaX), var(--deltaY)) scale(0);
+                }
+            }
+            
+            @keyframes explosion {
+                0% {
+                    opacity: 1;
+                    transform: scale(0);
+                }
+                50% {
+                    opacity: 0.8;
+                    transform: scale(1);
+                }
+                100% {
+                    opacity: 0;
+                    transform: scale(1.5);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize all effects
+        createStars();
+        createParticles();
+        typeWriterEffect();
+    </script>
+</body>
+</html>
